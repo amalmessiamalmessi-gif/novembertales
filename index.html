@@ -190,8 +190,27 @@ const noBtn = document.getElementById("noBtn");
 const overlay = document.getElementById("popupOverlay");
 
 yesBtn.addEventListener("click", () => {
-  overlay.innerHTML = "<h1 style='color:white;'>Kunje, you are my forever. I love you more than words can explain ❤️</h1>";
+  // Create the fading message
+  const msg = document.createElement("h1");
+  msg.style.color = "white";
+  msg.style.opacity = 1;
+  msg.style.transition = "opacity 3s";
+  msg.innerHTML = "Kunje, you are my forever. I love you more than words can explain ❤️";
+
+  overlay.innerHTML = ""; // remove popup buttons
+  overlay.appendChild(msg);
+
   setInterval(createHeart, 300);
+
+  // Fade out message after 3 seconds
+  setTimeout(() => {
+    msg.style.opacity = 0;
+  }, 3000);
+
+  // Remove overlay completely after 6 seconds
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 6000);
 });
 
 noBtn.addEventListener("mouseover", () => {
