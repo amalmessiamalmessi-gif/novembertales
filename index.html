@@ -22,7 +22,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,10 +38,6 @@ body {
   max-width: 400px;
 }
 
-.popup h2 {
-  margin-bottom: 20px;
-}
-
 .btn {
   padding: 12px 25px;
   margin: 10px;
@@ -52,14 +48,8 @@ body {
   transition: 0.3s;
 }
 
-#yesBtn {
-  background: #ff4d6d;
-  color: white;
-}
-
-#noBtn {
-  background: #ccc;
-}
+#yesBtn { background: #ff4d6d; color: white; }
+#noBtn { background: #ccc; }
 
 /* HERO */
 .hero {
@@ -67,18 +57,26 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px;
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
-/* TIMELINE */
-.timeline {
+.quote {
+  font-style: italic;
+  margin-top: 20px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* SECTION */
+.section {
+  padding: 50px 20px;
   max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: auto;
 }
 
 .timeline-item {
@@ -86,21 +84,19 @@ h1 {
   margin: 20px 0;
   padding: 20px;
   border-radius: 15px;
-  transition: 0.5s;
 }
 
-.timeline-item:hover {
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.2);
+/* QUIZ */
+.quiz-option {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
 
-/* CLOCK */
-#loveClock {
-  font-size: 22px;
-  margin-top: 15px;
-}
-
-/* FLOATING HEARTS */
+/* HEARTS */
 .heart {
   position: fixed;
   color: #ff4d6d;
@@ -128,60 +124,67 @@ h1 {
 <!-- HERO -->
 <div class="hero">
   <h1>NovemberTales0613</h1>
-  <p>For the girl who made my November the most beautiful chapter of my life.</p>
+  <div class="quote">
+    “I have found the one whom my soul loves.”  
+    — Song of Solomon 3:4 ❤️
+  </div>
 </div>
 
 <!-- LOVE CLOCK -->
-<div style="padding:50px;">
+<div class="section">
   <h2>Since You Said Yes ❤️</h2>
   <div id="loveClock"></div>
 </div>
 
 <!-- TIMELINE -->
-<div class="timeline">
-  <h2>Our Story ❤️</h2>
+<div class="section">
+  <h2>Our Story</h2>
 
   <div class="timeline-item">
     <h3>June 12, 2023</h3>
-    <p>
-      The day you said YES.  
-      The day my heart found its forever.  
-      The beginning of us.
-    </p>
+    <p>The day you said YES. My forever started here.</p>
   </div>
 
   <div class="timeline-item">
     <h3>August 28, 2023</h3>
-    <p>
-      The day I moved abroad.  
-      Distance tried to test us,  
-      but love only grew stronger.  
-      You’ve been waiting. Loving. Believing.
-    </p>
+    <p>The day I moved abroad. Distance grew, but so did our love.</p>
   </div>
 
   <div class="timeline-item">
-    <h3>Still Counting...</h3>
-    <p>
-      No matter the distance,  
-      no matter the timezone,  
-      we are choosing each other every single day.
-    </p>
-  </div>
-
-  <div class="timeline-item">
-    <h3>Endless Days Together</h3>
-    <p>
-      One day, no more airports.  
-      No more countdowns.  
-      Just mornings together.  
-      Forever.
-    </p>
+    <h3>Endless Days Ahead</h3>
+    <p>No more goodbyes. Just forever together.</p>
   </div>
 </div>
 
+<!-- QUIZ -->
+<div class="section">
+  <h2>Mini Love Quiz 😌</h2>
+
+  <p>What is my qualification? (If wrong later I'll kill you for this question 😂)</p>
+  <button class="quiz-option" onclick="checkQualification('PGDM')">PGDM</button>
+  <button class="quiz-option" onclick="checkQualification('MBA')">MBA</button>
+  <button class="quiz-option" onclick="checkQualification('Engineering')">Engineering</button>
+  <button class="quiz-option" onclick="checkQualification('Doctor')">Doctor</button>
+
+  <p id="quizResult1"></p>
+
+  <br><br>
+
+  <p>Where do you want to go for a trip?</p>
+  <button class="quiz-option" onclick="tripAnswer()">Switzerland</button>
+  <button class="quiz-option" onclick="tripAnswer()">France</button>
+  <button class="quiz-option" onclick="tripAnswer()">Maldives</button>
+  <button class="quiz-option" onclick="tripAnswer()">Anywhere in Europe</button>
+
+  <p id="quizResult2"></p>
+</div>
+
+<div class="section">
+  <h2>Love you always ❤️</h2>
+</div>
+
 <script>
-/* POPUP BUTTON LOGIC */
+/* YES BUTTON FADE */
 let yesSize = 1;
 let noSize = 1;
 
@@ -190,39 +193,27 @@ const noBtn = document.getElementById("noBtn");
 const overlay = document.getElementById("popupOverlay");
 
 yesBtn.addEventListener("click", () => {
-  // Create the fading message
   const msg = document.createElement("h1");
   msg.style.color = "white";
   msg.style.opacity = 1;
   msg.style.transition = "opacity 3s";
-  msg.innerHTML = "Kunje, you are my forever. I love you more than words can explain ❤️";
+  msg.innerHTML = "Kunje, you are my forever ❤️";
 
-  overlay.innerHTML = ""; // remove popup buttons
+  overlay.innerHTML = "";
   overlay.appendChild(msg);
 
   setInterval(createHeart, 300);
 
-  // Fade out message after 3 seconds
-  setTimeout(() => {
-    msg.style.opacity = 0;
-  }, 3000);
-
-  // Remove overlay completely after 6 seconds
-  setTimeout(() => {
-    overlay.style.display = "none";
-  }, 6000);
+  setTimeout(() => { msg.style.opacity = 0; }, 3000);
+  setTimeout(() => { overlay.style.display = "none"; }, 6000);
 });
 
 noBtn.addEventListener("mouseover", () => {
   yesSize += 0.2;
   noSize -= 0.1;
-
   yesBtn.style.transform = `scale(${yesSize})`;
   noBtn.style.transform = `scale(${noSize})`;
-
-  if(noSize <= 0.5){
-    noBtn.style.display = "none";
-  }
+  if(noSize <= 0.5){ noBtn.style.display = "none"; }
 });
 
 /* LOVE CLOCK */
@@ -231,22 +222,32 @@ function updateLoveClock() {
   const now = new Date();
   const diff = now - startDate;
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
   document.getElementById("loveClock").innerHTML =
-    days + " days " +
-    hours + " hours " +
-    minutes + " minutes " +
-    seconds + " seconds ❤️";
+    days + " days " + hours + " hours " +
+    minutes + " minutes " + seconds + " seconds ❤️";
 }
-
 setInterval(updateLoveClock, 1000);
 updateLoveClock();
 
-/* FLOATING HEARTS */
+/* QUIZ */
+function checkQualification(answer) {
+  if(answer === "PGDM") {
+    document.getElementById("quizResult1").innerHTML = "Correct 😌 You know me well!";
+  } else {
+    document.getElementById("quizResult1").innerHTML = "Wrong answer 😏 I’m watching you!";
+  }
+}
+
+function tripAnswer() {
+  document.getElementById("quizResult2").innerHTML = "Noted ❤️ Packing my bags already!";
+}
+
+/* HEARTS */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
