@@ -4,132 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NovemberTales0613</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #1e1e2f, #302b63, #24243e);
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
-}
-
-/* POPUP */
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popup {
-  background: white;
-  color: #333;
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 400px;
-}
-
-.btn {
-  padding: 12px 25px;
-  margin: 10px;
-  font-size: 18px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#yesBtn { background: #ff4d6d; color: white; }
-#noBtn { background: #ccc; }
-
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-}
-
-#bibleVerse {
-  font-style: italic;
-  margin-top: 20px;
-  font-size: 18px;
-  opacity: 0.9;
-  transition: opacity 1s;
-}
-
-/* SECTION */
-.section {
-  padding: 50px 20px;
-  max-width: 800px;
-  margin: auto;
-}
-
-.timeline-item {
-  background: rgba(255,255,255,0.1);
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 15px;
-}
-
-/* QUIZ */
-.quiz-option {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-}
-
-/* HEARTS */
-.heart {
-  position: fixed;
-  color: #ff4d6d;
-  animation: float 6s infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(100vh); opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* SECRET GALLERY */
-#gallery {
-  display: none;
-  margin-top: 30px;
-}
-#gallery img {
-  width: 200px;
-  margin: 10px;
-  border-radius: 15px;
-}
+body {margin:0; font-family:'Poppins', sans-serif; background: linear-gradient(to right,#1e1e2f,#302b63,#24243e); color:white; text-align:center; overflow-x:hidden;}
+.overlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center;z-index:1000;}
+.popup{background:white;color:#333;padding:40px;border-radius:20px;text-align:center;max-width:400px;}
+.btn{padding:12px 25px;margin:10px;font-size:18px;border:none;border-radius:30px;cursor:pointer;transition:0.3s;}
+#yesBtn{background:#ff4d6d;color:white;}
+#noBtn{background:#ccc;}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:20px;}
+h1{font-family:'Playfair Display', serif;font-size:3rem;}
+#bibleVerse{font-style:italic;margin-top:20px;font-size:18px;opacity:0.9;transition:opacity 1s;}
+.section{padding:50px 20px;max-width:800px;margin:auto;}
+.timeline-item{background:rgba(255,255,255,0.1);margin:20px 0;padding:20px;border-radius:15px;}
+.quiz-option{display:block;margin:10px auto;padding:10px 20px;border-radius:20px;border:none;cursor:pointer;}
+.heart{position:fixed;color:#ff4d6d;animation:float 6s infinite;}
+@keyframes float{0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
+#gallery{display:none;margin-top:30px;}
+#gallery img{width:200px;margin:10px;border-radius:15px;}
+#musicControls{margin-top:20px;}
 </style>
 </head>
-
 <body>
 
-<!-- AUDIO -->
+<!-- Background Music -->
 <audio id="bgMusic" autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b1e0e45de1.mp3?filename=romantic-love-music-1-11200.mp3" type="audio/mpeg">
 </audio>
+<div id="musicControls">
+  <button onclick="toggleMusic()" class="btn">Play / Pause Music 🎵</button>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+</div>
 
-<!-- POPUP -->
+<!-- Popup -->
 <div class="overlay" id="popupOverlay">
   <div class="popup">
     <h2>Will you be my Valentine, Kunje? ❤️</h2>
@@ -138,68 +45,61 @@ h1 {
   </div>
 </div>
 
-<!-- HERO -->
+<!-- Hero Section -->
 <div class="hero">
   <h1>NovemberTales0613</h1>
   <div id="bibleVerse">“I have found the one whom my soul loves.” — Song of Solomon 3:4 ❤️</div>
 </div>
 
-<!-- LOVE CLOCK -->
+<!-- Love Clock -->
 <div class="section">
   <h2>Since You Said Yes ❤️</h2>
   <div id="loveClock"></div>
 </div>
 
-<!-- TIMELINE -->
+<!-- Timeline -->
 <div class="section">
   <h2>Our Story</h2>
-
   <div class="timeline-item">
     <h3>June 12, 2023</h3>
     <p>The day you said YES. My forever started here.</p>
   </div>
-
   <div class="timeline-item">
     <h3>August 28, 2023</h3>
     <p>The day I moved abroad. Distance grew, but so did our love.</p>
   </div>
-
   <div class="timeline-item">
     <h3>Endless Days Ahead</h3>
     <p>No more goodbyes. Just forever together.</p>
   </div>
 </div>
 
-<!-- QUIZ -->
+<!-- Quiz -->
 <div class="section">
   <h2>Mini Love Quiz 😌</h2>
-
   <p>What is my qualification? (If wrong later I'll kill you for this question 😂)</p>
   <button class="quiz-option" onclick="checkQualification('PGDM')">PGDM</button>
   <button class="quiz-option" onclick="checkQualification('MBA')">MBA</button>
   <button class="quiz-option" onclick="checkQualification('Engineering')">Engineering</button>
   <button class="quiz-option" onclick="checkQualification('Doctor')">Doctor</button>
-
   <p id="quizResult1"></p>
 
   <br><br>
-
   <p>Where do you want to go for a trip?</p>
   <button class="quiz-option" onclick="tripAnswer()">Switzerland</button>
   <button class="quiz-option" onclick="tripAnswer()">France</button>
   <button class="quiz-option" onclick="tripAnswer()">Maldives</button>
   <button class="quiz-option" onclick="tripAnswer()">Anywhere in Europe</button>
-
   <p id="quizResult2"></p>
 
   <br>
   <button class="btn" onclick="toggleGallery()">Unlock Secret Gallery 🔒</button>
 
-  <!-- SECRET GALLERY -->
+  <!-- Secret Gallery -->
   <div id="gallery">
-    <img https://github.com/amalmessiamalmessi-gif/novembertales/blob/main/WhatsApp%20Image%202026-02-11%20at%208.48.54%20AM%20(1).jpeg>
-    <img https://github.com/amalmessiamalmessi-gif/novembertales/blob/main/WhatsApp%20Image%202026-02-11%20at%208.48.54%20AM%20(2).jpeg>
-    <img https://github.com/amalmessiamalmessi-gif/novembertales/blob/main/WhatsApp%20Image%202026-02-11%20at%208.48.54%20AM.jpeg>
+    <img src="WhatsApp Image 2026-02-11 at 8.48.54 AM (1).jpeg" alt="Love Photo 1">
+    <img src="WhatsApp Image 2026-02-11 at 8.48.54 AM (2).jpeg" alt="Love Photo 2">
+    <img src="WhatsApp Image 2026-02-11 at 8.48.54 AM.jpeg" alt="Love Photo 3">
   </div>
 </div>
 
@@ -208,30 +108,24 @@ h1 {
 </div>
 
 <script>
-/* YES BUTTON FADE */
+/* Popup Button */
 let yesSize = 1;
 let noSize = 1;
-
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const overlay = document.getElementById("popupOverlay");
-
 yesBtn.addEventListener("click", () => {
   const msg = document.createElement("h1");
   msg.style.color = "white";
   msg.style.opacity = 1;
   msg.style.transition = "opacity 3s";
   msg.innerHTML = "Kunje, you are my forever ❤️";
-
   overlay.innerHTML = "";
   overlay.appendChild(msg);
-
   setInterval(createHeart, 300);
-
   setTimeout(() => { msg.style.opacity = 0; }, 3000);
   setTimeout(() => { overlay.style.display = "none"; }, 6000);
 });
-
 noBtn.addEventListener("mouseover", () => {
   yesSize += 0.2;
   noSize -= 0.1;
@@ -240,55 +134,54 @@ noBtn.addEventListener("mouseover", () => {
   if(noSize <= 0.5){ noBtn.style.display = "none"; }
 });
 
-/* LOVE CLOCK */
+/* Love Clock */
 function updateLoveClock() {
   const startDate = new Date("June 12, 2023 00:00:00");
   const now = new Date();
   const diff = now - startDate;
-
   const days = Math.floor(diff / (1000*60*60*24));
   const hours = Math.floor((diff / (1000*60*60)) % 24);
   const minutes = Math.floor((diff / (1000*60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("loveClock").innerHTML =
-    days + " days " + hours + " hours " +
-    minutes + " minutes " + seconds + " seconds ❤️";
+  document.getElementById("loveClock").innerHTML = days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds ❤️";
 }
 setInterval(updateLoveClock, 1000);
 updateLoveClock();
 
-/* QUIZ */
+/* Quiz */
 function checkQualification(answer) {
-  if(answer === "PGDM") {
-    document.getElementById("quizResult1").innerHTML = "Correct 😌 You know me well!";
-  } else {
-    document.getElementById("quizResult1").innerHTML = "Wrong answer 😏 I’m watching you!";
-  }
+  if(answer === "PGDM") document.getElementById("quizResult1").innerHTML = "Correct 😌 You know me well!";
+  else document.getElementById("quizResult1").innerHTML = "Wrong answer 😏 I’m watching you!";
 }
+function tripAnswer() {document.getElementById("quizResult2").innerHTML = "Noted ❤️ Packing my bags already!";}
 
-function tripAnswer() {
-  document.getElementById("quizResult2").innerHTML = "Noted ❤️ Packing my bags already!";
-}
-
-/* HEARTS */
+/* Hearts */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
   heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 10 + "px";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*20+10 + "px";
   document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
+  setTimeout(()=>heart.remove(),6000);
 }
 
-/* SECRET GALLERY */
+/* Secret Gallery with Password */
 function toggleGallery() {
   const gallery = document.getElementById("gallery");
-  gallery.style.display = gallery.style.display === "block" ? "none" : "block";
+  const password = prompt("Enter the secret password ❤️ (hint: ddmmyyyy)");
+  if(password === "13112000") gallery.style.display = gallery.style.display === "block" ? "none" : "block";
+  else alert("Wrong password 😏 Only for my love!");
 }
 
-/* ROTATING BIBLE VERSES */
+/* Music Controls */
+const bgMusic = document.getElementById("bgMusic");
+const volumeSlider = document.getElementById("volumeSlider");
+bgMusic.volume = 0.5;
+function toggleMusic() { if(bgMusic.paused) bgMusic.play(); else bgMusic.pause(); }
+volumeSlider.addEventListener("input", function(){ bgMusic.volume = this.value; });
+
+/* Rotating Bible Verses */
 const verses = [
   "“I have found the one whom my soul loves.” — Song of Solomon 3:4",
   "“Love is patient, love is kind.” — 1 Corinthians 13:4",
@@ -296,19 +189,17 @@ const verses = [
   "“Above all, love each other deeply.” — 1 Peter 4:8",
   "“Many waters cannot quench love.” — Song of Solomon 8:7"
 ];
-
 let verseIndex = 0;
-function rotateVerse() {
+function rotateVerse(){
   const verseEl = document.getElementById("bibleVerse");
-  verseEl.style.opacity = 0;
-  setTimeout(() => {
+  verseEl.style.opacity=0;
+  setTimeout(()=>{
     verseEl.innerHTML = verses[verseIndex];
-    verseEl.style.opacity = 1;
-    verseIndex = (verseIndex + 1) % verses.length;
-  }, 1000);
+    verseEl.style.opacity=1;
+    verseIndex=(verseIndex+1)%verses.length;
+  },1000);
 }
-setInterval(rotateVerse, 7000); // Change every 7 seconds
+setInterval(rotateVerse,7000);
 </script>
-
 </body>
 </html>
