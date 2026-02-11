@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovemberTales0613</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #1e1e2f, #302b63, #24243e);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* POPUP */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  color: #333;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background: #ccc;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.timeline-item {
+  background: rgba(255,255,255,0.1);
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 15px;
+  transition: 0.5s;
+}
+
+.timeline-item:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.2);
+}
+
+.heart {
+  position: fixed;
+  color: #ff4d6d;
+  animation: float 6s infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+<div class="overlay" id="popupOverlay">
+  <div class="popup">
+    <h2>Will you be my Valentine, Kunje? ❤️</h2>
+    <button class="btn" id="yesBtn">Yes 💖</button>
+    <button class="btn" id="noBtn">No 🙈</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>NovemberTales0613</h1>
+  <p>A love story written in November...</p>
+</div>
+
+<div class="timeline">
+  <h2>Our Timeline</h2>
+
+  <div class="timeline-item">
+    <h3>The Day We Met</h3>
+    <p>That ordinary day that became my favorite memory.</p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>First Laugh</h3>
+    <p>The moment I realized your smile could fix anything.</p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>0613</h3>
+    <p>A date that means forever to me.</p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>Today</h3>
+    <p>Still choosing you. Every day. Always.</p>
+  </div>
+</div>
+
+<script>
+let yesSize = 1;
+let noSize = 1;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const overlay = document.getElementById("popupOverlay");
+
+yesBtn.addEventListener("click", () => {
+  overlay.innerHTML = "<h1 style='color:white;'>You just made me the happiest person alive ❤️</h1>";
+  setInterval(createHeart, 300);
+});
+
+noBtn.addEventListener("mouseover", () => {
+  yesSize += 0.2;
+  noSize -= 0.1;
+
+  yesBtn.style.transform = `scale(${yesSize})`;
+  noBtn.style.transform = `scale(${noSize})`;
+
+  if(noSize <= 0.5){
+    noBtn.style.display = "none";
+  }
+});
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 10 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+</script>
+
+</body>
+</html>
