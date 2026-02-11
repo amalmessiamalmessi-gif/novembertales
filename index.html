@@ -61,6 +61,7 @@ body {
   background: #ccc;
 }
 
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
@@ -73,6 +74,7 @@ h1 {
   font-size: 3.5rem;
 }
 
+/* TIMELINE */
 .timeline {
   max-width: 800px;
   margin: 50px auto;
@@ -92,6 +94,13 @@ h1 {
   background: rgba(255,255,255,0.2);
 }
 
+/* CLOCK */
+#loveClock {
+  font-size: 22px;
+  margin-top: 15px;
+}
+
+/* FLOATING HEARTS */
 .heart {
   position: fixed;
   color: #ff4d6d;
@@ -116,36 +125,63 @@ h1 {
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <h1>NovemberTales0613</h1>
-  <p>A love story written in November...</p>
+  <p>For the girl who made my November the most beautiful chapter of my life.</p>
 </div>
 
+<!-- LOVE CLOCK -->
+<div style="padding:50px;">
+  <h2>Since You Said Yes ❤️</h2>
+  <div id="loveClock"></div>
+</div>
+
+<!-- TIMELINE -->
 <div class="timeline">
-  <h2>Our Timeline</h2>
+  <h2>Our Story ❤️</h2>
 
   <div class="timeline-item">
-    <h3>The Day We Met</h3>
-    <p>That ordinary day that became my favorite memory.</p>
+    <h3>June 12, 2023</h3>
+    <p>
+      The day you said YES.  
+      The day my heart found its forever.  
+      The beginning of us.
+    </p>
   </div>
 
   <div class="timeline-item">
-    <h3>First Laugh</h3>
-    <p>The moment I realized your smile could fix anything.</p>
+    <h3>August 28, 2023</h3>
+    <p>
+      The day I moved abroad.  
+      Distance tried to test us,  
+      but love only grew stronger.  
+      You’ve been waiting. Loving. Believing.
+    </p>
   </div>
 
   <div class="timeline-item">
-    <h3>0613</h3>
-    <p>A date that means forever to me.</p>
+    <h3>Still Counting...</h3>
+    <p>
+      No matter the distance,  
+      no matter the timezone,  
+      we are choosing each other every single day.
+    </p>
   </div>
 
   <div class="timeline-item">
-    <h3>Today</h3>
-    <p>Still choosing you. Every day. Always.</p>
+    <h3>Endless Days Together</h3>
+    <p>
+      One day, no more airports.  
+      No more countdowns.  
+      Just mornings together.  
+      Forever.
+    </p>
   </div>
 </div>
 
 <script>
+/* POPUP BUTTON LOGIC */
 let yesSize = 1;
 let noSize = 1;
 
@@ -154,7 +190,7 @@ const noBtn = document.getElementById("noBtn");
 const overlay = document.getElementById("popupOverlay");
 
 yesBtn.addEventListener("click", () => {
-  overlay.innerHTML = "<h1 style='color:white;'>You just made me the happiest person alive ❤️</h1>";
+  overlay.innerHTML = "<h1 style='color:white;'>Kunje, you are my forever. I love you more than words can explain ❤️</h1>";
   setInterval(createHeart, 300);
 });
 
@@ -170,6 +206,28 @@ noBtn.addEventListener("mouseover", () => {
   }
 });
 
+/* LOVE CLOCK */
+function updateLoveClock() {
+  const startDate = new Date("June 12, 2023 00:00:00");
+  const now = new Date();
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("loveClock").innerHTML =
+    days + " days " +
+    hours + " hours " +
+    minutes + " minutes " +
+    seconds + " seconds ❤️";
+}
+
+setInterval(updateLoveClock, 1000);
+updateLoveClock();
+
+/* FLOATING HEARTS */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
