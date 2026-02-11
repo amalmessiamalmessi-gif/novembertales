@@ -65,11 +65,12 @@ h1 {
   font-size: 3rem;
 }
 
-.quote {
+#bibleVerse {
   font-style: italic;
   margin-top: 20px;
   font-size: 18px;
   opacity: 0.9;
+  transition: opacity 1s;
 }
 
 /* SECTION */
@@ -107,10 +108,26 @@ h1 {
   0% { transform: translateY(100vh); opacity: 1; }
   100% { transform: translateY(-10vh); opacity: 0; }
 }
+
+/* SECRET GALLERY */
+#gallery {
+  display: none;
+  margin-top: 30px;
+}
+#gallery img {
+  width: 200px;
+  margin: 10px;
+  border-radius: 15px;
+}
 </style>
 </head>
 
 <body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b1e0e45de1.mp3?filename=romantic-love-music-1-11200.mp3" type="audio/mpeg">
+</audio>
 
 <!-- POPUP -->
 <div class="overlay" id="popupOverlay">
@@ -124,10 +141,7 @@ h1 {
 <!-- HERO -->
 <div class="hero">
   <h1>NovemberTales0613</h1>
-  <div class="quote">
-    “I have found the one whom my soul loves.”  
-    — Song of Solomon 3:4 ❤️
-  </div>
+  <div id="bibleVerse">“I have found the one whom my soul loves.” — Song of Solomon 3:4 ❤️</div>
 </div>
 
 <!-- LOVE CLOCK -->
@@ -177,6 +191,16 @@ h1 {
   <button class="quiz-option" onclick="tripAnswer()">Anywhere in Europe</button>
 
   <p id="quizResult2"></p>
+
+  <br>
+  <button class="btn" onclick="toggleGallery()">Unlock Secret Gallery 🔒</button>
+
+  <!-- SECRET GALLERY -->
+  <div id="gallery">
+    <img src="https://cdn.pixabay.com/photo/2017/08/06/22/56/couple-2596940_1280.jpg" alt="Love Image 1">
+    <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/love-1284412_1280.jpg" alt="Love Image 2">
+    <img src="https://cdn.pixabay.com/photo/2016/12/06/18/27/love-1886319_1280.jpg" alt="Love Image 3">
+  </div>
 </div>
 
 <div class="section">
@@ -257,6 +281,33 @@ function createHeart() {
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 6000);
 }
+
+/* SECRET GALLERY */
+function toggleGallery() {
+  const gallery = document.getElementById("gallery");
+  gallery.style.display = gallery.style.display === "block" ? "none" : "block";
+}
+
+/* ROTATING BIBLE VERSES */
+const verses = [
+  "“I have found the one whom my soul loves.” — Song of Solomon 3:4",
+  "“Love is patient, love is kind.” — 1 Corinthians 13:4",
+  "“Set me as a seal upon your heart, for love is strong as death.” — Song of Solomon 8:6",
+  "“Above all, love each other deeply.” — 1 Peter 4:8",
+  "“Many waters cannot quench love.” — Song of Solomon 8:7"
+];
+
+let verseIndex = 0;
+function rotateVerse() {
+  const verseEl = document.getElementById("bibleVerse");
+  verseEl.style.opacity = 0;
+  setTimeout(() => {
+    verseEl.innerHTML = verses[verseIndex];
+    verseEl.style.opacity = 1;
+    verseIndex = (verseIndex + 1) % verses.length;
+  }, 1000);
+}
+setInterval(rotateVerse, 7000); // Change every 7 seconds
 </script>
 
 </body>
