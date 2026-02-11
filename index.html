@@ -18,11 +18,17 @@ h1{font-family:'Playfair Display', serif;font-size:3rem;}
 .section{padding:50px 20px;max-width:800px;margin:auto;}
 .timeline-item{background:rgba(255,255,255,0.1);margin:20px 0;padding:20px;border-radius:15px;}
 .quiz-option{display:block;margin:10px auto;padding:10px 20px;border-radius:20px;border:none;cursor:pointer;}
-.heart{position:fixed;color:#ff4d6d;animation:float 6s infinite;}
-@keyframes float{0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
 #gallery{display:none;margin-top:30px;}
 #gallery img{width:200px;margin:10px;border-radius:15px;}
 #musicControls{margin-top:20px;}
+
+/* Heart Styles */
+.heart{position:fixed;color:#ff4d6d;font-size:20px;pointer-events:none;animation:float 4s linear forwards;}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(1); opacity:1;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh) scale(1.5); opacity:0;}
+}
 </style>
 </head>
 <body>
@@ -98,7 +104,7 @@ h1{font-family:'Playfair Display', serif;font-size:3rem;}
   <h2>Love you always ❤️</h2>
 </div>
 
-<!-- Dandelions Song (plays on Yes click) -->
+<!-- Dandelions Song -->
 <audio id="dandelionsSong">
   <source src="Ruth_B._-_Dandelions_(Audio)_128k.mp3" type="audio/mpeg">
 </audio>
@@ -113,23 +119,24 @@ const overlay = document.getElementById("popupOverlay");
 
 yesBtn.addEventListener("click", () => {
     const song = document.getElementById("dandelionsSong");
-    song.play(); // Play Dandelions song on Yes
+    song.play(); // Play song on Yes
 
+    overlay.innerHTML = ""; // clear popup
     const msg = document.createElement("h1");
     msg.style.color = "white";
     msg.style.opacity = 1;
     msg.style.transition = "opacity 3s";
     msg.innerHTML = "Kunje, you are my forever ❤️";
-
-    overlay.innerHTML = "";
     overlay.appendChild(msg);
 
-    // Hearts start immediately
-    setInterval(createHeart, 300);
+    // Create multiple hearts filling the screen
+    for(let i=0;i<200;i++){
+        setTimeout(createHeart, i*10); // small delay for continuous flow
+    }
 
-    // Fade out the message
-    setTimeout(() => { msg.style.opacity = 0; }, 3000);
-    setTimeout(() => { overlay.style.display = "none"; }, 6000);
+    // Fade out text
+    setTimeout(()=>{msg.style.opacity=0;},3000);
+    setTimeout(()=>{overlay.style.display="none";},6000);
 });
 
 noBtn.addEventListener("mouseover", () => {
@@ -162,41 +169,41 @@ function checkQualification(answer) {
 function tripAnswer() {document.getElementById("quizResult2").innerHTML = "Noted ❤️ Packing my bags already!";}
 
 /* Hearts */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = Math.random()*20+10 + "px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML="❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = Math.random()*30+10 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
 }
 
-/* Secret Gallery with Password */
+/* Secret Gallery */
 function toggleGallery() {
   const gallery = document.getElementById("gallery");
   const password = prompt("Enter the secret password ❤️ (hint: ddmmyyyy)");
-  if(password === "13112000") gallery.style.display = gallery.style.display === "block" ? "none" : "block";
+  if(password==="13112000") gallery.style.display = gallery.style.display==="block"? "none":"block";
   else alert("Wrong password 😏 Only for my love!");
 }
 
 /* Rotating Bible Verses */
-const verses = [
+const verses=[
   "“I have found the one whom my soul loves.” — Song of Solomon 3:4",
   "“Love is patient, love is kind.” — 1 Corinthians 13:4",
   "“Set me as a seal upon your heart, for love is strong as death.” — Song of Solomon 8:6",
   "“Above all, love each other deeply.” — 1 Peter 4:8",
   "“Many waters cannot quench love.” — Song of Solomon 8:7"
 ];
-let verseIndex = 0;
+let verseIndex=0;
 function rotateVerse(){
-  const verseEl = document.getElementById("bibleVerse");
-  verseEl.style.opacity=0;
-  setTimeout(()=>{
-    verseEl.innerHTML = verses[verseIndex];
-    verseEl.style.opacity=1;
-    verseIndex=(verseIndex+1)%verses.length;
-  },1000);
+    const verseEl=document.getElementById("bibleVerse");
+    verseEl.style.opacity=0;
+    setTimeout(()=>{
+        verseEl.innerHTML=verses[verseIndex];
+        verseEl.style.opacity=1;
+        verseIndex=(verseIndex+1)%verses.length;
+    },1000);
 }
 setInterval(rotateVerse,7000);
 </script>
