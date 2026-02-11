@@ -24,17 +24,15 @@ h1{font-family:'Playfair Display', serif;font-size:3rem;}
 
 /* Heart Styles */
 .heart{
-    position:absolute;
+    pointer-events: none;
+    position: fixed;
+    z-index: 9999;
+    animation: float 4s linear forwards;
     color:#ff4d6d;
-    font-size:20px;
-    pointer-events:none;
-    z-index:2000;
-    animation:float 4s linear forwards;
 }
-@keyframes float{
-  0%{transform:translateY(100vh) scale(1); opacity:1;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh) scale(1.5); opacity:0;}
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  100% { transform: translateY(-100vh) scale(1.5); opacity:0; }
 }
 </style>
 </head>
@@ -117,7 +115,7 @@ h1{font-family:'Playfair Display', serif;font-size:3rem;}
 </audio>
 
 <script>
-/* Popup Button */
+/* Popup Buttons */
 let yesSize = 1;
 let noSize = 1;
 const yesBtn = document.getElementById("yesBtn");
@@ -136,15 +134,16 @@ yesBtn.addEventListener("click", () => {
     msg.innerHTML = "Kunje, you are my forever ❤️";
     overlay.appendChild(msg);
 
-    // Hearts filling overlay
+    // Hearts filling the screen
     for(let i=0;i<200;i++){
         setTimeout(()=>{
             const heart = document.createElement("div");
             heart.className="heart";
             heart.innerHTML="❤️";
-            heart.style.left = Math.random()*80 + "vw";
-            heart.style.top = Math.random()*80 + "vh";
-            overlay.appendChild(heart);
+            heart.style.left = Math.random()*100 + "vw";
+            heart.style.top = Math.random()*100 + "vh";
+            heart.style.fontSize = (Math.random()*30 + 20) + "px";
+            document.body.appendChild(heart);
             setTimeout(()=>heart.remove(),4000);
         }, i*15);
     }
